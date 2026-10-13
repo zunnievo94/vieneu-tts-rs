@@ -1,0 +1,36 @@
+[package]
+name = "vieneu-tts"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.82"
+license = "Apache-2.0"
+description = "Vietnamese text-to-speech with VieNeu-TTS v3 (Turbo and Nano) in Rust, without Python: a port of VieNeu-TTS's ONNX inference"
+repository = "https://github.com/zunnievo94/vieneu-tts-rs"
+keywords = ["tts", "vietnamese", "speech", "onnx", "vieneu"]
+categories = ["multimedia::audio"]
+readme = "README.md"
+
+[features]
+default = ["download-ort", "download"]
+# Let `ort` download a prebuilt ONNX Runtime at build time.
+download-ort = ["ort/download-binaries", "ort/copy-dylibs", "ort/tls-rustls"]
+# Use an ONNX Runtime the program already links instead (for example one
+# linked by sherpa-onnx); see `use_ort_api_base`. Turn off default features.
+shared-ort = ["ort/alternative-backend"]
+# `download::download` to fetch model files.
+download = ["dep:ureq", "dep:tempfile"]
+
+[dependencies]
+anyhow = "1"
+ort = { version = "=2.0.0-rc.14", default-features = false, features = ["std"] }
+# Vietnamese text normalization and phonemes: the Rust core of sea-g2p.
+sea-g2p-rs = { git = "https://github.com/pnnbao97/sea-g2p", rev = "e825173f235d08ea19315b2b279fb11153b44cea", default-features = false }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+tempfile = { version = "3", optional = true }
+tokenizers = { version = "0.23", default-features = false, features = ["fancy-regex"] }
+ureq = { version = "3", optional = true }
+zip = { version = "2", default-features = false, features = ["deflate"] }
+
+[dev-dependencies]
+hound = "3"

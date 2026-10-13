@@ -1,0 +1,29 @@
+vieneu-tts-rs
+Copyright 2026 zunnievo94
+
+This product is a Rust port of software and uses models created by others.
+All of the speech models, their training, the inference design and the
+reference implementation are the work of their authors; this project only
+re-implements the inference code in Rust.
+
+VieNeu-TTS — https://github.com/pnnbao97/VieNeu-TTS
+  Copyright Phạm Nguyễn Ngọc Bảo (pnnbao97), licensed under the Apache
+  License 2.0. The code in src/ is a port of its ONNX inference engines
+  (src/vieneu/_v3_turbo_engine/onnx_runtime_lite.py, src/vieneu/v3nano.py)
+  and helpers from src/vieneu_utils/ (phonemize_text.py, core_utils.py,
+  _v3_turbo_engine/rep_history.py), rewritten in Rust and adapted: the
+  sentence chunking is simplified to one sentence at a time and audio
+  watermarking is not applied. The preset voices (assets/voices_v3_*.json)
+  are downloaded from that repository at run time, not redistributed.
+  Models: https://huggingface.co/pnnbao-ump/VieNeu-TTS-v3-Turbo and
+  https://huggingface.co/pnnbao-ump/VieNeu-TTS-v3-Nano (Apache-2.0),
+  downloaded from Hugging Face at run time, not redistributed.
+
+sea-g2p — https://github.com/pnnbao97/sea-g2p
+  Copyright Phạm Nguyễn Ngọc Bảo (pnnbao97), licensed under the Apache
+  License 2.0. Used as a library (its Rust crate); its dictionary
+  sea_g2p.bin is downloaded from that repository at run time.
+
+MOSS Audio Tokenizer Nano — https://huggingface.co/OpenMOSS-Team/MOSS-Audio-Tokenizer-Nano-ONNX
+  By OpenMOSS-Team, licensed under the Apache License 2.0. The ONNX codec
+  decoder is downloaded from Hugging Face at run time, not redistributed.

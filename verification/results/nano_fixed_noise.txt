@@ -1,0 +1,9 @@
+Nano, voice Minh Quân, same starting noise (numpy seed 1234), phonemes in turbo_greedy_phonemes.txt
+samples: python 34560, rust 34560
+max |difference|: 6.49e-06
+signal-to-difference ratio: 111.6 dB
+
+The run above used ONNX Runtime 1.28.2 (the one sherpa-onnx links, as in
+Marginalia). With the same ONNX Runtime as the Python package (1.31.0):
+max |difference|: 6.98e-10
+signal-to-difference ratio: 200.3 dB

@@ -1,0 +1,43 @@
+py_turbo: WER 3.9% (10/258)
+  py_turbo_1_1.wav: trăm năm trong cõi người ta chữ mệnh khéo là ghét nhau
+  py_turbo_1_2.wav: trăm năm trong cõi người ta chữ tài chữ mạnh khéo là ghét nhau
+  py_turbo_3_0.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  py_turbo_3_1.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  py_turbo_3_2.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  py_turbo_4_0.wav: nước
+  py_turbo_6_0.wav: ông lão kể rằng ngày xưa ở làng này có một cái đà rất lớn
+  py_turbo_6_2.wav: ông lão kể rằng ngày xưa ở làng này có một cây đà rất lớn
+rs_turbo: WER 1.9% (5/258)
+  rs_turbo_1_1.wav: trăm năm trong cõi người ta chữ tài chữ mạnh khéo là ghét nhau
+  rs_turbo_1_2.wav: trăm năm trong cõi người ta chữ tài chữ mạnh khéo là ghét nhau
+  rs_turbo_3_0.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  rs_turbo_3_1.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  rs_turbo_3_2.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+py_nano: WER 2.3% (6/258)
+  py_nano_3_0.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  py_nano_3_1.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  py_nano_3_2.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  py_nano_4_0.wav: được được
+  py_nano_6_0.wav: ông lão kể rằng ngày xưa ở làng này có một cây đá rất lớn
+  py_nano_7_1.wav: những trang sách cũ vẫn còn thơm thơm mùi giấy và mực
+rs_nano: WER 4.7% (12/258)
+  rs_nano_0_0.wav: ừ chúc bạn đọc sách vui vẻ
+  rs_nano_0_1.wav: đọc sách vui vẻ
+  rs_nano_1_2.wav: trăm năm trong cõi người ta chữ tài chữa mệnh khéo là ghét nhau
+  rs_nano_3_0.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  rs_nano_3_1.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  rs_nano_3_2.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  rs_nano_4_0.wav: được được
+  rs_nano_4_1.wav: được được
+  rs_nano_7_1.wav: những trang sách cũ vẫn có những con còn thơm mùi giấy và mực
+rs_piper: WER 3.9% (10/258)
+  rs_piper_1_0.wav: trăm năm trong cõi người ta chữ tài chữ mệnh khéo la ghét nhau
+  rs_piper_2_0.wav: buổi sáng hôm ấy trời mưa lâm thầm và gió lạnh thổi qua những con phố nhỏ
+  rs_piper_2_1.wav: buổi sáng hôm ấy trời mưa lâm thầm và gió lạnh thổi qua những con phố nhỏ
+  rs_piper_3_0.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  rs_piper_3_1.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  rs_piper_3_2.wav: cô gái đứng lặng bên cửa sổ nhìn theo bóng người đi xa
+  rs_piper_4_0.wav: đường
+  rs_piper_7_0.wav: những trang sách cũ vẫn còn thầm mùi giấy và mực
+  rs_piper_7_1.wav: những trang sách cũ vẫn còn thâm mùi giấy và mực
+  rs_piper_7_2.wav: những trang sách cũ vẫn còn thầm mùi giấy và mực
