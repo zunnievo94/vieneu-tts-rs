@@ -1,5 +1,9 @@
 # vieneu-tts-rs
 
+> **Unofficial** Rust port, not affiliated with or endorsed by the
+> VieNeu-TTS project. For the official package, go to
+> <https://github.com/pnnbao97/VieNeu-TTS>.
+
 Vietnamese text-to-speech with **[VieNeu-TTS](https://github.com/pnnbao97/VieNeu-TTS)
 v3** (Turbo and Nano) in **Rust, without Python**.
 

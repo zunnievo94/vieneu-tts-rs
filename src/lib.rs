@@ -1,5 +1,8 @@
 //! Vietnamese text-to-speech with [VieNeu-TTS] v3, in Rust, without Python.
 //!
+//! An unofficial port, not affiliated with or endorsed by the VieNeu-TTS
+//! project.
+//!
 //! VieNeu-TTS is a Vietnamese speech family by Phạm Nguyễn Ngọc Bảo
 //! (Apache-2.0). Its CPU path is already free of PyTorch: ONNX graphs plus
 //! some NumPy glue. This crate is a Rust port of that glue:

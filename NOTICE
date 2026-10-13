@@ -1,7 +1,8 @@
 vieneu-tts-rs
 Copyright 2026 zunnievo94
 
-This product is a Rust port of software and uses models created by others.
+This product is an unofficial Rust port, not affiliated with or endorsed by
+the VieNeu-TTS project. It ports software and uses models created by others.
 All of the speech models, their training, the inference design and the
 reference implementation are the work of their authors; this project only
 re-implements the inference code in Rust.
