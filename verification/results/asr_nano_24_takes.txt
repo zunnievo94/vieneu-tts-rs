@@ -1,0 +1,8 @@
+py_nano: WER 4.2% (6/144)
+  py_nano_0_19.wav: ờ xuân đọc sách vui vẻ
+  py_nano_0_2.wav: chưa chúc đọc sách vui vẻ
+  py_nano_0_7.wav: đọc sách đọc sách vui vẻ
+rs_nano: WER 4.2% (6/144)
+  rs_nano_0_14.wav: ừm đọc sách vui vẻ
+  rs_nano_0_16.wav: ừm đọc sách vui vẻ
+  rs_nano_0_9.wav: chọn đọc sách vui vẻ

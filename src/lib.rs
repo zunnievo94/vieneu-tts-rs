@@ -460,6 +460,16 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
+    fn dump_normals() {
+        let mut r = Rng::new();
+        let v: Vec<u8> = (0..1_000_000)
+            .flat_map(|_| r.normal().to_le_bytes())
+            .collect();
+        std::fs::write(std::env::var("VIENEU_TEST_OUT").unwrap(), v).unwrap();
+    }
+
+    #[test]
     fn rng_is_sane() {
         let mut r = Rng(1);
         let n = 20000;

@@ -72,7 +72,12 @@ câu sai): [`results/asr_wer.txt`](results/asr_wer.txt).
 - Lỗi "đi xa dần" → "đi xa" có ở mọi engine, kể cả Piper: lỗi của máy
   nhận dạng.
 - Chênh lệch Python/Rust là do lấy mẫu ngẫu nhiên; mục 3 và 4 cho thấy
-  mạng chạy giống hệt.
+  mạng chạy giống hệt. Để chắc, câu Nano hay sai nhất ("Chúc bạn đọc sách
+  vui vẻ.") được chạy thêm 24 lần mỗi bên: Python 4,2%, Rust 4,2%
+  ([`results/asr_nano_24_takes.txt`](results/asr_nano_24_takes.txt)). Bộ
+  sinh nhiễu của Rust cũng đã được kiểm tra trên 10⁶ mẫu: trung bình
+  −0,001, phương sai 1,000, độ nhọn 2,99, tương quan bậc 1 −0,001 (test
+  `dump_normals`).
 - Mẫu Rust lúc đó được tạo qua CLI của Marginalia, vốn thêm 1,5 s im lặng
   cuối chương; đoạn im lặng đó được cắt trước khi chấm vì máy nhận dạng
   hay "nghe" ra chữ trong im lặng dài.
