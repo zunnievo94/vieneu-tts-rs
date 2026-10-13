@@ -15,6 +15,10 @@
 //! tokens, identical audio codes from Turbo with sampling turned off, and
 //! the same Nano waveform for the same starting noise.
 //!
+//! It came out of work on [Marginalia](https://github.com/zunnievo94/Marginalia),
+//! an ebook reader that reads aloud, and is kept as its own crate so other
+//! Rust programs can use it too.
+//!
 //! ```no_run
 //! use vieneu_tts::{Engine, Model};
 //!

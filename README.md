@@ -1,62 +1,68 @@
 # vieneu-tts-rs
 
-Giọng đọc tiếng Việt **[VieNeu-TTS](https://github.com/pnnbao97/VieNeu-TTS)
-v3** (Turbo và Nano) chạy bằng **Rust, không cần Python**.
+Vietnamese text-to-speech with **[VieNeu-TTS](https://github.com/pnnbao97/VieNeu-TTS)
+v3** (Turbo and Nano) in **Rust, without Python**.
 
-*Vietnamese text-to-speech with VieNeu-TTS v3 in Rust, without Python.
-English below.*
+It came out of work on [Marginalia](https://github.com/zunnievo94/Marginalia),
+an open-source ebook reader that reads books aloud, while looking for
+natural Vietnamese voices that run without Python. It lives in its own
+repository in case other Rust programs can use it too.
 
-> ### Công sức thuộc về tác giả VieNeu-TTS
+> ### Credit belongs to the VieNeu-TTS authors
 >
-> Toàn bộ model, dữ liệu huấn luyện, kiến trúc và bản cài đặt gốc là công
-> trình của **Phạm Nguyễn Ngọc Bảo** ([@pnnbao97](https://github.com/pnnbao97))
-> và dự án **VieNeu-TTS**. Codec âm thanh là
+> The models, their training data, architecture and the reference
+> implementation are the work of **Phạm Nguyễn Ngọc Bảo**
+> ([@pnnbao97](https://github.com/pnnbao97)) and the **VieNeu-TTS** project.
+> The audio codec is
 > [MOSS Audio Tokenizer Nano](https://huggingface.co/OpenMOSS-Team/MOSS-Audio-Tokenizer-Nano-ONNX)
-> của **OpenMOSS-Team**. Phần chuẩn hoá văn bản và phiên âm là
-> [sea-g2p](https://github.com/pnnbao97/sea-g2p), cũng của Phạm Nguyễn Ngọc Bảo.
+> by **OpenMOSS-Team**. Text normalization and phonemes come from
+> [sea-g2p](https://github.com/pnnbao97/sea-g2p), also by Phạm Nguyễn Ngọc Bảo.
 >
-> Repo này **chỉ viết lại phần chạy suy luận (inference) bằng Rust**, theo
-> đúng code Python của VieNeu-TTS, để dùng được trong ứng dụng Rust mà
-> không cần cài Python. Mọi cải tiến về chất lượng giọng đọc là của nhóm
-> VieNeu.
+> This repository **only re-implements the inference code in Rust**,
+> following VieNeu-TTS's Python code, so it can run in a Rust application
+> with no Python installed. Everything that makes the voices good is the
+> VieNeu team's.
 >
-> - Mã nguồn gốc: <https://github.com/pnnbao97/VieNeu-TTS>
-> - Model v3 Turbo: <https://huggingface.co/pnnbao-ump/VieNeu-TTS-v3-Turbo>
-> - Model v3 Nano: <https://huggingface.co/pnnbao-ump/VieNeu-TTS-v3-Nano>
-> - Discord của VieNeu: <https://discord.gg/yJt8kzjzWZ>
+> - Source: <https://github.com/pnnbao97/VieNeu-TTS>
+> - v3 Turbo model: <https://huggingface.co/pnnbao-ump/VieNeu-TTS-v3-Turbo>
+> - v3 Nano model: <https://huggingface.co/pnnbao-ump/VieNeu-TTS-v3-Nano>
+> - VieNeu Discord: <https://discord.gg/yJt8kzjzWZ>
 >
-> Model **không** được đóng gói hay đăng lại ở đây: thư viện tải trực tiếp
-> từ Hugging Face và GitHub của tác giả, ghim theo commit đã kiểm chứng.
+> No model is bundled or re-hosted here: the crate downloads every file
+> from the authors' own Hugging Face and GitHub repositories, pinned to
+> the commits it was verified against.
 
-## Có gì
+## What it does
 
-| Model | Tải về | Chất lượng | Tốc độ (4 nhân CPU) |
+| Model | Download | Voice | Speed on 4 CPU cores |
 | --- | --- | --- | --- |
-| **v3 Turbo** | 583 MB | giọng tự nhiên nhất, 48 kHz, 25 giọng | ~1× thời gian thực |
-| **v3 Nano** | 347 MB | 24 kHz, 11 giọng, cho máy yếu hơn | ~0,6× thời gian thực |
+| **v3 Turbo** | 583 MB | the most natural; 48 kHz, 25 preset voices | about real time |
+| **v3 Nano** | 347 MB | 24 kHz, 11 preset voices, for slower machines | about 0.6 × real time |
 
-(Dung lượng đã gồm từ điển sea-g2p 63 MB.)
+(Sizes include the 63 MB sea-g2p dictionary.)
 
-- Phiên âm bằng crate Rust của sea-g2p; tokenizer bằng `tokenizers`.
-- Đồ thị ONNX chạy bằng ONNX Runtime qua [`ort`](https://github.com/pykeio/ort).
-- Phần "keo" NumPy của VieNeu (embedding, lấy mẫu top-k/top-p, phạt lặp
-  theo cửa sổ, giới hạn khung, chống "nói thêm" ở câu ngắn, bước Euler +
-  classifier-free guidance của Nano) được port sang Rust.
-- Chưa có: nhân bản giọng từ file mẫu (voice cloning), streaming theo
-  khung, watermark âm thanh (tuỳ chọn trong bản Python, mặc định tắt).
+- Phonemes come from sea-g2p's Rust crate; the Turbo tokenizer runs on
+  `tokenizers`.
+- The ONNX graphs run in ONNX Runtime through [`ort`](https://github.com/pykeio/ort).
+- The NumPy glue of VieNeu-TTS is ported: embeddings and the speaker
+  projection, top-k/top-p sampling with a windowed repetition penalty, the
+  frame cap and the guard against short chunks that babble, and Nano's
+  Euler steps with classifier-free guidance.
+- Not ported: voice cloning from a reference clip, frame-level streaming,
+  and the audio watermark (optional in the Python package, off by default).
 
-## Dùng thử
+## Try it
 
 ```sh
 cargo run --release --example say -- turbo "Xin chào, mình là VieNeu." out.wav
 cargo run --release --example say -- turbo "Xin chào." out.wav "Ngọc Huyền"
-cargo run --release --example say -- turbo --voices     # danh sách giọng
+cargo run --release --example say -- turbo --voices
 cargo run --release --example say -- nano "Xin chào." out.wav
 ```
 
-Lần đầu chạy sẽ tải model vào `./models/`.
+The first run downloads the model into `./models/`.
 
-## Dùng trong code
+## Use it
 
 ```toml
 [dependencies]
@@ -70,43 +76,46 @@ let dir = std::path::Path::new("models/vieneu-tts-v3-turbo");
 vieneu_tts::download::download(Model::Turbo, dir, &mut |done, total| {})?;
 let mut tts = Engine::load(Model::Turbo, dir, "Hải Đăng")?;
 let samples: Vec<f32> = tts.synthesize("Trăm năm trong cõi người ta.")?; // mono, [-1, 1]
-let rate = tts.sample_rate(); // 48 000 (Turbo) / 24 000 (Nano)
+let rate = tts.sample_rate(); // 48 000 (Turbo) or 24 000 (Nano)
 ```
 
-Nên đưa vào từng câu hoặc đoạn ngắn; câu dài được tự chia theo dấu câu.
+Pass one sentence or a short paragraph at a time; long sentences are split
+at punctuation.
 
-### Tính năng (features)
+### Features
 
-- `download-ort` (mặc định): `ort` tải sẵn ONNX Runtime khi build.
-- `download` (mặc định): hàm `download::download` để tải model.
-- `shared-ort`: dùng ONNX Runtime mà chương trình đã link sẵn (ví dụ qua
-  sherpa-onnx), gọi `vieneu_tts::use_ort_api_base(OrtGetApiBase())` một
-  lần trước khi nạp model. Dùng với `default-features = false`.
+- `download-ort` (default): `ort` downloads a prebuilt ONNX Runtime at
+  build time.
+- `download` (default): `download::download` fetches model files.
+- `shared-ort`: use an ONNX Runtime the program already links (for example
+  through sherpa-onnx). Call `vieneu_tts::use_ort_api_base(OrtGetApiBase())`
+  once before loading a model, and turn off the default features. This is
+  how Marginalia uses the crate, sharing sherpa-onnx's runtime.
 
-Ví dụ thực tế: trình đọc sách [Marginalia](https://github.com/zunnievo94/Marginalia)
-dùng crate này với `shared-ort`, chung ONNX Runtime với sherpa-onnx.
+## How it was verified
 
-## Đã kiểm chứng thế nào
+The port was compared with the official Python package `vieneu` 3.8.3 (its
+ONNX Runtime path). Scripts, inputs and outputs are in
+[`verification/`](verification/):
 
-Bản port được so trực tiếp với gói Python `vieneu` 3.8.3 (chạy trên ONNX
-Runtime). Chi tiết, script và kết quả nằm trong [`verification/`](verification/):
-
-| Kiểm tra | Kết quả |
+| Check | Result |
 | --- | --- |
-| Phiên âm (10 câu có số, ngày, email, tiếng Anh, °C, %) | **giống hệt** sea-g2p Python |
-| Token của tokenizer Turbo | **giống hệt** `tokenizers` Python |
-| Turbo, tắt lấy mẫu ngẫu nhiên (greedy) | **cùng 17 × 16 mã âm thanh** với Python |
-| Nano, cùng nhiễu đầu vào | cùng sóng âm: sai khác tối đa 7·10⁻¹⁰ (200 dB) với cùng bản ONNX Runtime |
-| Nhận dạng giọng nói (8 câu × 3 lần, zipformer-vi) | Turbo 1,9% từ sai (Python 3,9%), Nano 4,7% (Python 2,3%) |
+| Phonemes (10 sentences with numbers, dates, e-mail, English words, °C, %) | **identical** to Python sea-g2p |
+| Turbo tokenizer ids | **identical** to Python `tokenizers` |
+| Turbo with sampling off (greedy) | **the same 17 × 16 audio codes** as Python |
+| Nano with the same starting noise | the same waveform: max difference 7·10⁻¹⁰ (200 dB) on the same ONNX Runtime |
+| Speech recognition (8 sentences × 3 takes, zipformer-vi) | Turbo 1.9% word errors (Python 3.9%), Nano 4.7% (Python 2.3%) |
 
-Chênh lệch ở dòng cuối là do lấy mẫu ngẫu nhiên: hai dòng kiểm tra tất định
-ở trên cho thấy mạng chạy giống hệt.
+The differences in the last row are sampling noise: the deterministic
+checks above show the networks run identically, and 24 more takes of the
+sentence Nano gets wrong most often scored 4.2% for both.
 
-## Giấy phép
+## License
 
-[Apache-2.0](LICENSE), giống VieNeu-TTS và sea-g2p. Xem [NOTICE](NOTICE)
-về nguồn gốc từng phần. Model tải về giữ giấy phép riêng (đều Apache-2.0
-tại thời điểm viết). Nếu dùng cho nghiên cứu, hãy trích dẫn VieNeu-TTS:
+[Apache-2.0](LICENSE), like VieNeu-TTS and sea-g2p. [NOTICE](NOTICE) says
+where each part comes from. The downloaded models keep their own licenses
+(all Apache-2.0 at the time of writing). For research use, please cite
+VieNeu-TTS:
 
 ```bibtex
 @misc{vieneutts2026,
@@ -117,22 +126,3 @@ tại thời điểm viết). Nếu dùng cho nghiên cứu, hãy trích dẫn V
   howpublished = {\url{https://huggingface.co/pnnbao-ump/VieNeu-TTS}}
 }
 ```
-
----
-
-## English
-
-A Rust port of the inference code of
-[VieNeu-TTS](https://github.com/pnnbao97/VieNeu-TTS) v3 Turbo and Nano, the
-Vietnamese text-to-speech models by **Phạm Nguyễn Ngọc Bảo**. All models,
-training and the reference implementation are the VieNeu-TTS authors'
-work (the audio codec is OpenMOSS-Team's MOSS Audio Tokenizer Nano, the
-phonemizer is [sea-g2p](https://github.com/pnnbao97/sea-g2p)); this crate
-only re-implements inference in Rust so it can run without Python.
-Models are downloaded from the authors' Hugging Face repositories, pinned
-to the verified commits, and are not redistributed here.
-
-The port reproduces the Python package exactly where it is deterministic:
-the same phonemes and tokens, the same audio codes from Turbo with
-sampling off, and the same Nano waveform for the same starting noise. See
-[`verification/`](verification/).
